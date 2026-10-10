@@ -1,4 +1,5 @@
 ﻿using ECommerce.Abstraction.IServices;
+using ECommerce.Shared.Common;
 using ECommerce.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,9 +21,9 @@ namespace ECommerce.Presentation.Controllers
             this.serviceManager = serviceManager;
         }
         [HttpGet("Products")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(int? BrandId , int? TypeId)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(int? BrandId , int? TypeId , ProductSortingWay ? sortingWay)
         {
-            var Products = await serviceManager.ProductServices.GetAllProductsAsync(BrandId , TypeId);
+            var Products = await serviceManager.ProductServices.GetAllProductsAsync(BrandId , TypeId , sortingWay);
 
             return Ok(Products);
         }
