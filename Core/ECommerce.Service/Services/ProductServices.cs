@@ -3,6 +3,7 @@ using ECommerce.Abstraction.IServices;
 using ECommerce.Domain.Contratcs.UOW;
 using ECommerce.Domain.Models.Products;
 using ECommerce.Service.Specifications;
+using ECommerce.Shared.Common;
 using ECommerce.Shared.Dtos;
 using System;
 using System.Collections.Generic;
@@ -37,11 +38,11 @@ namespace ECommerce.Service.Services
         //    return ProductDto;
         //}
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? BrandId, int? TypeId)
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? BrandId, int? TypeId , ProductSortingWay? sortingWay)
         {
             var Repo = unitOfWork.GetRepository<Product,int>();
 
-            var Spec = new ProductSpecifications(BrandId , TypeId);
+            var Spec = new ProductSpecifications(BrandId , TypeId , sortingWay);
 
             var Products = await Repo.GetAllWithSpecificationAsync(Spec);
 
