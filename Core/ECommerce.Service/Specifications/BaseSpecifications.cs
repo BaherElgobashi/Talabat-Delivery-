@@ -26,13 +26,24 @@ namespace ECommerce.Service.Specifications
         #endregion
 
         #region OrderBy and OrderByDesc.
+        public Expression<Func<TEntity, object>> OrderBy { get; private set; }
+
+        public Expression<Func<TEntity, object>> OrderByDesc { get; private set; }
+
+        protected void AddOrderBy(Expression<Func<TEntity, object>> _OrderBy)
+        {
+            OrderBy = _OrderBy;
+        }
+
+        protected void AddOrderByDesc(Expression<Func<TEntity, object>> _OrderByDesc)
+        {
+            OrderByDesc = _OrderByDesc;
+        }
 
         #endregion
 
         #region Includes.
         public List<Expression<Func<TEntity, object>>> Includes { get; } = [];
-
-       
 
         protected void AddIncludes(Expression<Func<TEntity, object>> IncludeExpresion)
         {
