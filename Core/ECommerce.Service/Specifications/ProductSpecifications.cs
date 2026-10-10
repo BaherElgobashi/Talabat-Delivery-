@@ -41,6 +41,9 @@ namespace ECommerce.Service.Specifications
                 case ProductSortingWay.PriceDesc:
                     AddOrderByDesc(p => p.Price);
                     break;
+
+                default:
+                    break;
             }
 
 

@@ -24,6 +24,18 @@ namespace ECommerce.Persistence
                     query = query.Where(specification.Criteria);
                 }
 
+                // OrderBy.
+                if(specification.OrderBy is not null)
+                {
+                    query = query.OrderBy(specification.OrderBy);
+                }
+
+                // OrderByDesc.
+                if(specification.OrderByDesc is not null)
+                {
+                    query = query.OrderByDescending(specification.OrderByDesc);
+                }
+
                 // Includes.
 
                 if(specification.Includes is not null && specification.Includes.Any())
