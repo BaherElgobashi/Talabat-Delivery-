@@ -38,11 +38,12 @@ namespace ECommerce.Service.Services
         //    return ProductDto;
         //}
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? BrandId, int? TypeId , ProductSortingWay? sortingWay)
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductQueryParams productQueryParams)
         {
+            var Spec = new ProductSpecifications(productQueryParams);
+
             var Repo = unitOfWork.GetRepository<Product,int>();
 
-            var Spec = new ProductSpecifications(BrandId , TypeId , sortingWay);
 
             var Products = await Repo.GetAllWithSpecificationAsync(Spec);
 
