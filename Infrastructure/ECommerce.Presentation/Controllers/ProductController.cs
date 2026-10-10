@@ -21,9 +21,9 @@ namespace ECommerce.Presentation.Controllers
             this.serviceManager = serviceManager;
         }
         [HttpGet("Products")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(int? BrandId , int? TypeId , ProductSortingWay ? sortingWay)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(ProductQueryParams productQueryParams)
         {
-            var Products = await serviceManager.ProductServices.GetAllProductsAsync(BrandId , TypeId , sortingWay);
+            var Products = await serviceManager.ProductServices.GetAllProductsAsync(productQueryParams);
 
             return Ok(Products);
         }
