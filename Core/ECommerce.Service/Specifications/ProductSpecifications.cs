@@ -18,13 +18,13 @@ namespace ECommerce.Service.Specifications
         }
 
         // Get All Products With BrandId and TypeId Filtration.
-        public ProductSpecifications(int? BrandId, int? TypeId , ProductSortingWay? sortingWay) : 
-            base(p => (!BrandId.HasValue ||p.BrandId == BrandId) && (!TypeId.HasValue || p.TypeId == TypeId))
+        public ProductSpecifications(ProductQueryParams productQueryParams) : 
+            base(p => (!productQueryParams.BrandId.HasValue ||p.BrandId == productQueryParams.BrandId) && (!productQueryParams.TypeId.HasValue || p.TypeId == productQueryParams.TypeId))
         {
             AddIncludes(p => p.Brand);
             AddIncludes(p => p.Type);
 
-            switch (sortingWay) 
+            switch (productQueryParams.sortingWay) 
             {
                 case ProductSortingWay.NameAsc:
                     AddOrderBy(p => p.Name);
