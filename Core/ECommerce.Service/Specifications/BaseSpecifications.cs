@@ -25,7 +25,11 @@ namespace ECommerce.Service.Specifications
 
         #endregion
 
-        #region Includes
+        #region OrderBy and OrderByDesc.
+
+        #endregion
+
+        #region Includes.
         public List<Expression<Func<TEntity, object>>> Includes { get; } = [];
 
        
