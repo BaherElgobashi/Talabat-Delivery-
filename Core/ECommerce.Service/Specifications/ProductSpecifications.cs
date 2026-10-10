@@ -1,6 +1,7 @@
 ﻿using ECommerce.Domain.Models.Products;
 using ECommerce.Shared.Common;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,8 @@ namespace ECommerce.Service.Specifications
 
         // Get All Products With BrandId and TypeId Filtration.
         public ProductSpecifications(ProductQueryParams productQueryParams) : 
-            base(p => (!productQueryParams.BrandId.HasValue ||p.BrandId == productQueryParams.BrandId) && (!productQueryParams.TypeId.HasValue || p.TypeId == productQueryParams.TypeId))
+            base(p => (!productQueryParams.BrandId.HasValue ||p.BrandId == productQueryParams.BrandId) && (!productQueryParams.TypeId.HasValue || p.TypeId == productQueryParams.TypeId)
+            && (string.IsNullOrEmpty(productQueryParams.SearchValue) || p.Name.ToLower().Contains(productQueryParams.SearchValue.ToLower()) ))
         {
             AddIncludes(p => p.Brand);
             AddIncludes(p => p.Type);
